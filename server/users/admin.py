@@ -13,7 +13,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = [
         'email', 
         'username', 
-        'name', 
+        'name',
         'is_staff'
     ]
     fieldsets = UserAdmin.fieldsets + ((None, {'fields': ('name',)}),)
