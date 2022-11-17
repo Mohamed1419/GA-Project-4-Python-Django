@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     #my apps
     'users',
-    'movies',
-    'listings'
+    'listings', 
+    'likes',
 ]
 
 MIDDLEWARE = [
