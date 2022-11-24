@@ -15,26 +15,26 @@ class ListingSerializer(serializers.ModelSerializer):
         author_data = validated_data.pop('author')
         return get_user_model().objects.get_or_create(author_data)
     
-    author = AuthorSerializer(read_only=True)
-    author_id = serializers.PrimaryKeyRelatedField(queryset=get_user(), write_only=True, source='author')
-    # author = AuthorSerializer('')
-    # author = serializers.RelatedField
-    # tags = TagSerializer(many=True)
+    author = AuthorSerializer()
 
     class Meta:
         model = Listing
-        fields = ('id', 'movie_id', 'author', 'price', 'author_id')
+        fields = ('id', 'movie_id', 'author', 'price', 'like_count',)
 
     def create(self, validated_data):
-        author_data = validated_data.pop('author')
-        price_data = validated_data.pop('price')
+        discarded_user = validated_data.pop('author')
+        author = self.context['request'].user
+        # author_data = validated_data.pop('author')
+        # price_data = validated_data.pop('price')
         # tags_data = validated_data.pop("tags") 
         # tags = []
         # for tag in tags_data:
         #     (newTag, _) = Tag.objects.get_or_create(name=tag)
         #     tags.append(newTag)
-        (author, _) = get_user_model().objects.get_or_create(author_data)
+        # (author, _) = get_user_model().objects.get_or_create(author_data)
         # (price, _) = get_user_model().objects.get_or_create(**price_data)
-        listing = Listing.objects.create(**validated_data, author=author)
+        listing = Listing.objects.create(**validated_data, author=author,)
         return listing
 
+class PopulatedListingSerializer(ListingSerializer):
+    author = AuthorSerializer()

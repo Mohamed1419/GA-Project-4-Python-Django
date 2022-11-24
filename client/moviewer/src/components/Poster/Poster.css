@@ -1,0 +1,24 @@
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.poster {
+    max-width: 200px;
+    border: 1px solid gold;
+    border-radius: 5px;
+    padding: 10px;
+    color: gold;
+    text-decoration: none; 
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.poster:hover {
+    background-color: darkblue;
+}
+
+img {
+    max-width: 200px;
+}

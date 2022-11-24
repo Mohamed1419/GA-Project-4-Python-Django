@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'address',
     #my apps
     'users',
     'listings', 
@@ -90,8 +91,8 @@ WSGI_APPLICATION = 'moviewer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':  'moviewer',
     }
 }
 
@@ -138,3 +139,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+#most likely an invalid key
+# GOOGLE_API_KEY = 'AIzaSyD--your-google-maps-key-SjQBE'

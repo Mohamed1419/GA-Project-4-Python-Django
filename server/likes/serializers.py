@@ -1,12 +1,13 @@
 from rest_framework import serializers
 from .models import Like
 from django.contrib.auth import get_user_model
+from listings.serializers import AuthorSerializer
 
 
-class AuthorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = get_user_model()
-        fields = ('username',)
+# class AuthorSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = get_user_model()
+#         fields = ('username',)
 
 
 class LikeSerializer(serializers.ModelSerializer):
@@ -25,5 +26,7 @@ class LikeSerializer(serializers.ModelSerializer):
         #     (newTag, _) = Tag.objects.get_or_create(name=tag)
         #     tags.append(newTag)
         (author, _) = get_user_model().objects.get_or_create(**author_data)
-        like = Like.objects.create(**validated_data, author=author,)
+        # like = Like.objects.create(**validated_data, author=author, tags=tags)
+        like = Like.objects.create(**validated_data, author=author)
         return like
+

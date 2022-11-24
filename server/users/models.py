@@ -7,7 +7,7 @@ from likes.models import Like
 class CustomUser(AbstractUser):
     name = models.CharField(null=True, blank=True, max_length=100)
     # username = models.CharField(null=True, blank=True, max_length=50)
-    # address =
+
     # likes = 
-    listings = models.ForeignKey(Listing, null=True, blank=True, related_name='listings', on_delete = models.CASCADE)
-    likes = models.ForeignKey(Like, null=True, blank=True, related_name='likes', on_delete=models.CASCADE)
+    # listings = models.ForeignKey(Listing, null=True, blank=True, related_name='listings', on_delete = models.CASCADE)
+    # likes = models.ForeignKey(Like, null=True, blank=True, related_name='likes', on_delete=models.CASCADE)

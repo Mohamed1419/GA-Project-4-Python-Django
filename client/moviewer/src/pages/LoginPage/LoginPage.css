@@ -1,42 +1,41 @@
-.SignupPage {
+.LoginPage {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     margin-bottom: 50px;
     height: 100vh;
-    width: 100%;
-}
-
-.form-box {
+  }
+  
+  .form-box {
     height: 25%;
-}
-
-.form-horizontal {
+  }
+  
+  .form-horizontal {
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-around;
-}
-
-button {
+  }
+  
+  button {
     margin: 0;
     padding: 0;
     text-decoration: none;
     font-weight: bold;
-}
-
-button p {
+  }
+  
+  button p {
     text-decoration: none;
     font-weight: bold;
-}
-
-.form-group {
+  }
+  
+  .form-group {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-h1 {
+  }
+  
+  h1 {
     font-weight: bold;
     font-size: 5vw;
-}
+  }
