@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import userService from '../../utils/userService';
-import useUser from '../../hooks/useUser';
+import useUser from '../../hooks/UseUser';
 
 function LoginPage() {
   const navigate = useNavigate()

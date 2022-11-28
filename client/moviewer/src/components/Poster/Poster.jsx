@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { getListing } from '../../utils/listingService'
@@ -31,8 +32,8 @@ console.log(tt);
 
   return (
     <div className='poster'>
-        <img src={image} alt={name}/>
-        <p>{description}</p>
+        <img src={image} alt={name} className='poster-image'/>
+        <p>{description.substring(0, 80)}...<Link to={`/detail/${tt}`} style={{color: 'white'}}>Read on</Link></p>
         {/* {stock} */}
     </div>
   )

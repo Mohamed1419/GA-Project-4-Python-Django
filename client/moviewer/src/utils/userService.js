@@ -1,6 +1,6 @@
 import tokenService from "./tokenService";
 
-const BASE_URL = "/api/users/"; // Note: Once deployed this should be updated.
+const BASE_URL = "http://localhost:8000/api-auth/"; // Note: Once deployed this should be updated.
 
 function signup(user) {
   return fetch(BASE_URL + "signup", {

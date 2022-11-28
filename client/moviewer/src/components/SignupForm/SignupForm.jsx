@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import userService from '../../utils/userService';
-import useUser from '../../hooks/useUser';
+import useUser from '../../hooks/UseUser';
+
 
 import "./SignupForm.css"
 

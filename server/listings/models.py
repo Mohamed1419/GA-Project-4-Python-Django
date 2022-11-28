@@ -4,7 +4,7 @@ from django.conf import settings
 # Create your models here.
 class Listing(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    movie_id = models.CharField(max_length=10, null=True, unique=True)
+    movie_id = models.CharField(max_length=10, null=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )

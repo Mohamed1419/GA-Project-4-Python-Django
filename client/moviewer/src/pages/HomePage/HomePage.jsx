@@ -28,7 +28,7 @@ function HomePage() {
 
         movies = await Promise.all(featured.map(tt => fetch(`https://i-m-d-b.herokuapp.com/?tt=${tt}`).then(res => res.json())));
         setMovies(movies);
-        // console.log(movies);
+        console.log(movies);
         // console.log(movies[0].tt_url.substring(27));
         // console.log(movies[0].title);
         // console.log(movies[0].poster);
