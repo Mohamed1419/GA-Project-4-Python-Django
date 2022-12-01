@@ -1,14 +1,15 @@
 import tokenService from "./tokenService";
 
-const BASE_URL = "http://localhost:8000/api-auth/"; // Note: Once deployed this should be updated.
+const BASE_URL = "http://localhost:8000/"; // Note: Once deployed this should be updated.
 
 function signup(user) {
-  return fetch(BASE_URL + "signup", {
+  return fetch(BASE_URL + "signup/", {
     method: "POST",
     headers: new Headers({ "Content-Type": "application/json" }),
     body: JSON.stringify(user),
   })
     .then((res) => {
+      console.log(res.json());
       if (res.ok) return res.json();
       throw new Error("Email already taken!");
     })
@@ -25,7 +26,7 @@ function logout() {
 }
 
 function login(creds) {
-  return fetch(BASE_URL + "login", {
+  return fetch(BASE_URL + "login/", {
     method: "POST",
     headers: new Headers({ "Content-Type": "application/json" }),
     body: JSON.stringify(creds),

@@ -77,12 +77,31 @@
     font-size: 16pt;
   }
 
+  .search {
+    display: flex;
+    justify-content: center;
+  }
+
   .searchbar {
     width: 50%;
     padding: 10px;
     margin-bottom: 30px;
   }
   
+  .search-icon {
+    padding: 3px;
+    margin-top: 3px;
+    border-radius: 7px;
+    /* margin-top: 2px; */
+    transition: 0.3s;
+    height: 25px;
+
+  }
+
+  .search-icon:hover {
+    border: 1px solid gold;
+  }
+
   .user-name,
   .navBar-logout, 
   .navBar-login, 

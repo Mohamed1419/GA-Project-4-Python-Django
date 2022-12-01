@@ -23,5 +23,6 @@
 
 .poster-image {
     max-width: 200px;
+    max-height: 305px;
     transition: 0.3s;
 }

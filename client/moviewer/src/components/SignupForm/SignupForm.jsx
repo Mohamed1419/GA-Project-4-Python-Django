@@ -11,10 +11,10 @@ function SignupForm({ updateMessage }) {
   const { handleSignupOrLogin } = useUser()
 
   const [state, setState] = React.useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
-    passwordConf: ''
+    password_confirmation: ''
   });
 
   const handleChange = (e) => {
@@ -41,7 +41,7 @@ function SignupForm({ updateMessage }) {
   }
 
   const isFormInvalid = () => {
-    return !(state.name && state.email && state.password === state.passwordConf);
+    return !(state.username && state.email && state.password === state.password_confirmation);
   }
 
   return (
@@ -51,7 +51,7 @@ function SignupForm({ updateMessage }) {
       <form className="form-horizontal" onSubmit={handleSubmit} >
         <div className="form-group">
           <div className="col-sm-12">
-            <input type="text" className="form-control" placeholder="Name" value={state.name} name="name" onChange={handleChange} />
+            <input type="text" className="form-control" placeholder="Username" value={state.username} name="username" onChange={handleChange} />
           </div>
         </div>
         <div className="form-group">
@@ -66,7 +66,7 @@ function SignupForm({ updateMessage }) {
         </div>
         <div className="form-group">
           <div className="col-sm-12">
-            <input type="password" className="form-control" placeholder="Confirm Password" value={state.passwordConf} name="passwordConf" onChange={handleChange} />
+            <input type="password" className="form-control" placeholder="Confirm Password" value={state.password_confirmation} name="password_confirmation" onChange={handleChange} />
           </div>
         </div>
         <div className="form-group buttons">

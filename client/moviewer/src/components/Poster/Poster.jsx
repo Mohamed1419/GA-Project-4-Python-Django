@@ -26,7 +26,7 @@ function Poster({tt, name, image, description, rating, genre, datePublished, act
 //             <button>Add to basket</button>
 //         </div>
 //     ) : (<div>Not in stock!</div>)
-console.log(tt);
+
 
     
 

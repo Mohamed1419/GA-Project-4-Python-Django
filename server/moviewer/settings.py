@@ -49,12 +49,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'moviewer.urls'
@@ -64,6 +64,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000', 
     #deployedapplication
 ]
+
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", 'http://localhost:8000']
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
 
@@ -142,3 +144,13 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 #most likely an invalid key
 # GOOGLE_API_KEY = 'AIzaSyD--your-google-maps-key-SjQBE'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'users.authentication.JWTAuthentication',
+    ],
+}

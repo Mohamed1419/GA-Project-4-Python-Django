@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import NavBar from '../../components/Navbar/Navbar';
 import { getListings } from '../../utils/listingService';
 import './DetailsPage.css'
@@ -30,7 +30,7 @@ function DetailsPage(props) {
       const listingsData = await getListings();
       console.log(listingsData); //all the listings in the database
       setListings(listingsData)
-      const specificListings = listingsData.filter(listing => listing.movie_id === params.tt_url)
+      const specificListings = listingsData.filter(listing => listing.movie_id === params.tt_url); //gets the listings matching tt_url
       setListing(specificListings)
       console.log(specificListings); //all the listings matching the tt_url
       if (specificListings) {
@@ -87,7 +87,7 @@ function DetailsPage(props) {
           <h3>{Movie.title}</h3>
           <div className='flex'>
             <h3>{lowestListing ? `£${lowestListing.price}` : 'None currently available to purchase!'}</h3> 
-            {Listing ? <button className='button'> + Add to cart </button> : null}
+            {lowestListing ? <button className='button'> + Add to cart </button> : null}
 
 
           </div>
@@ -106,9 +106,9 @@ function DetailsPage(props) {
             <h3>Offer</h3>
           </div>
           <div>
-            {Listing ? Listing.map((post) => (
+            {Listing.length > 0 ? Listing.map((post) => (
               <div className='offers-box-listings'>
-                <h4>{post.author.username}</h4>
+                <Link to={`/profile/${post.author.username}`}><button>{post.author.username}</button></Link>
                 <h4>£{post.price}</h4>
                 <button>Add to cart</button>
               </div>
