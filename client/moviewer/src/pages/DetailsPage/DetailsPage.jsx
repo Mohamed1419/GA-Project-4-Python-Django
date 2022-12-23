@@ -1,20 +1,65 @@
 import {React, useState, useEffect} from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import NavBar from '../../components/Navbar/Navbar';
-import { getListings } from '../../utils/listingService';
+import { getListings, createAListing } from '../../utils/listingService';
+import userService from '../../utils/userService';
 import './DetailsPage.css'
+import { removeAListing } from '../../utils/listingService';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 function DetailsPage(props) {
   let params = useParams();
+  let navigate = useNavigate();
   const [Movie, setMovie] = useState(null);
   const [Tags, setTags] = useState(null)
   const [Listings, setListings] = useState(null) //all the listings
   const [Listing, setListing] = useState(false) //all the listings with the matching tt_url
   const [lowestListing, setLowestListing] = useState(false)
+  let user = userService.getUser();
   useEffect(() => {
       getMovie();
       getTheListings();
     }, [])
+
+    const [formListing, setFormListing] = useState({
+      movie_id: params.tt_url, 
+      price: 0.00, 
+    })
+
+    let priceIsValid = formListing.price !== "" && formListing.price > 0
+    let formIsValid = priceIsValid;
+
+
+    let handleChange = (e) => {
+      setFormListing({...formListing, [e.target.name]: e.target.value})
+    }
+  
+    let handleSubmit = (e) => {
+      console.log(user);
+      console.log(formListing);
+      e.preventDefault()
+      const formData = new FormData();
+      Object.keys(formListing).forEach(key => {
+        if (formListing[key].constructor === Array) {
+          formListing[key].forEach(item => {
+            formData.append(key, item)
+            console.log(formData);
+          })
+        } else {
+          formData.append(key, formListing[key])
+          console.log(formData);
+        }
+      })
+
+      createAListing(formData).then(res => {
+        console.log(res)
+      })
+    }
+
+
 
     async function getMovie() {
       const response = await fetch(`https://i-m-d-b.herokuapp.com/?tt=${params.tt_url}`);
@@ -100,10 +145,32 @@ function DetailsPage(props) {
           <p className='general-p'>Release date: {Movie.jsonnnob.datePublished}</p>
         </div>
 
+
+
+
+
+        {user ? (
+          <div className='sell-form'>
+            <h3>Have one to sell?</h3>
+            <form className='form' onSubmit={handleSubmit} encType="multipart/form-data">
+              <label>Price</label>
+              <input name='price' value={formListing.price} onChange={handleChange} type="number" min="1" step=".01"></input>
+              <button type='Submit' disabled={!formIsValid}>Confirm listing</button>
+            </form>
+          </div>
+        ) : (
+          <div className='sell-form'>
+            <h3>Have one to sell?</h3>
+            <p><Link to={'/signup'}>Sign up</Link> or <Link to={'/login'}>login</Link> now</p>
+          </div>
+        )}
+
+
+
+
         <div className='offers-box'>
           <div className='offers-box-headers'>
-            <h3>Seller</h3>
-            <h3>Offer</h3>
+            <h3>Offers</h3>
           </div>
           <div>
             {Listing.length > 0 ? Listing.map((post) => (
@@ -111,6 +178,17 @@ function DetailsPage(props) {
                 <Link to={`/profile/${post.author.username}`}><button>{post.author.username}</button></Link>
                 <h4>£{post.price}</h4>
                 <button>Add to cart</button>
+                {post.author.id ? (
+                  <div>
+                  <IconButton aria-label="delete" size="large" className='icon-button'>
+                    <DeleteIcon onClick={() => removeAListing(post.id)} />
+                  </IconButton>
+                  
+                  <IconButton aria-label="edit" size="large" className='icon-button'>
+                    <EditIcon />
+                  </IconButton>
+                  </div>
+                ) : null}
               </div>
             )) : <h3>No listings currently available</h3>}
           </div>

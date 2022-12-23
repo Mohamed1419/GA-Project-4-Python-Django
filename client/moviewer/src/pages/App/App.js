@@ -29,8 +29,6 @@ function App() {
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/results/:query" element={<ResultsPage />} />
         <Route exact path="/profile/:author_id/" element={<MyShopPage />} />
-        {/* <Route exact path="/listing/new" element={<CreateListingPage />} />
-        <Route exact path="/listing/edit/:blogID" element={<EditListingPage />} /> */}
 
         {/* <Route exact path="/blogpost/detail/:id" element={<DetailPage />} />
 

@@ -22,14 +22,14 @@ image:hover {
 }
 
 .left {
-    border: 1px solid red;
     width:700px;
 
 }
 
 .right {
-    border: 1px solid red;
+
     width:50%;
+    border-radius: 5px;
 }
 
 .tags {
@@ -40,7 +40,7 @@ image:hover {
 
 .container-bar {
     width: 100%;
-    border: 3px solid gold;
+    /* border: 1px solid gold; */
     border-radius:  5px;
     display: flex;
     justify-content: space-around;
@@ -86,4 +86,12 @@ button {
     border: 1px solid gold;
     border-radius: 5px;
     margin: 5px 60px;
+}
+
+a {
+    color: white;
+}
+
+.icon-button {
+    color: gold;
 }

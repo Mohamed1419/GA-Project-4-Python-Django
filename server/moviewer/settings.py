@@ -11,7 +11,16 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
+from environ import Env
+import dj_database_url
+import os
 
+env = Env()
+environ.Env()
+environ.Env.read_env()
+
+DEBUG = env.bool('DEBUG', default=False)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0ir-z(b^o17d^wwpvj8vosztpz*q(z3h!-%2-vyvfptg)7k^5r'
-
+# SECRET_KEY = 'django-insecure-0ir-z(b^o17d^wwpvj8vosztpz*q(z3h!-%2-vyvfptg)7k^5r'
+SECRET_KEY = os.environ["SECRET_KEY"]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".netlify.app", "localhost", "127.0.0.1", "hostname.fly.dev"] # We'll need to update this later.
 
 
 # Application definition
@@ -40,6 +49,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'address',
+    'environ',
     #my apps
     'users',
     'listings', 
@@ -91,13 +101,18 @@ WSGI_APPLICATION = 'moviewer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'moviewer',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':  'moviewer',
+#     }
+# }
 
+database_url = os.environ.get('DATABASE_URL')
+
+DATABASES = {
+    "default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

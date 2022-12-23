@@ -23,8 +23,9 @@ class RegisterView(APIView):
             print(serializer.data)
 
             user = self.get_user(serializer.data['email'])
-
-            token = jwt.encode({'sub': user.id, 'user': user}, settings.SECRET_KEY, algorithm='HS256')
+            print({'sub': user.id, 'user': user}, settings.SECRET_KEY)
+            token = jwt.encode({'sub': user.id}, settings.SECRET_KEY, algorithm='HS256')
+            print('got this far')
             return Response({'token': token})
             # return Response({'message': 'Registration successful'})
 
@@ -49,5 +50,5 @@ class LoginView(APIView):
         if not user.check_password(password):
             raise PermissionDenied({'message': 'Invalid credentials'})
 
-        token = jwt.encode({'sub': user.id, 'user': user}, settings.SECRET_KEY, algorithm='HS256')
+        token = jwt.encode({'sub': user.id}, settings.SECRET_KEY, algorithm='HS256')
         return Response({'token': token, 'message': f'Welcome back {user.username}!'})
