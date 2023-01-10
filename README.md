@@ -2,7 +2,7 @@
 
     Project 4: Moviewer E-commerce App
 
-    Description
+    <h1>Description</h1>
 
 This was my fourth and final project on the course. I used React.js for the front end and Django to make an app which allows users to sign up, log in, and then browse the app to look for any movie and either buy or sell that specific movie. 
 
