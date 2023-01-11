@@ -2,15 +2,15 @@
 
     Project 4: Moviewer E-commerce App
 
-    <h1>Description</h1>
+## Description
 
 This was my fourth and final project on the course. I used React.js for the front end and Django to make an app which allows users to sign up, log in, and then browse the app to look for any movie and either buy or sell that specific movie. 
 
-    Deployment link
+## Deployment link
 
 ##################
 
-    Getting Started/Code Installation
+## Getting Started/Code Installation
 
 The app has 1 front end repo which can be accessed in the following link: 
 https://github.com/Mohamed1419/GA-Project-4-Python-Django/tree/main/client/moviewer
@@ -34,11 +34,11 @@ Start up the app by running the following in the root of the client/moviewer:
 npm start
 
 
-    Timeframe & Working Team (Solo/Pair/Group)
+## Timeframe & Working Team (Solo/Pair/Group)
 
 In this project I was working alone. I had 12 days to prepare our project for presentations from 12th November 2022 to 29th November 2022. 
 
-    Technologies Used
+## Technologies Used
 
 Front End:
 - React.js
@@ -63,7 +63,7 @@ Design:
 Planning:
 - Trello
 
-    Brief Instructions
+## Brief Instructions
 
 Technical Requirements
 
@@ -83,7 +83,7 @@ Necessary Deliverables
 - A link to your hosted working app in the URL section of your Github repo
 - A git repository hosted on Github, with a link to your hosted project, and frequent commits dating back to the very beginning of the project
 
-    Planning
+## Planning
 
 
 The first thing I did to prepare for this project was think of an idea, and after considering a few which I had an interest in and that could realistically meet all the deliverables I decided upon a movie e-commerce website. I decided to name the project Moviewer as I thought it was a fitting and unique title. 
@@ -94,8 +94,8 @@ Next, I started working on creating my data structures for my backend and after 
 
 Note: As of today, it seems that this API has been discontinued by the creator following Herokus changes to their plans (which had occured after the completion of this project), hence the app is currently broken at this point in time. 
 
-    Build/Code Process and Challenges
-
+## Build/Code Process and Challenges
+    ```js
     const getMovies = async () => {
         try {
 
@@ -108,9 +108,11 @@ Note: As of today, it seems that this API has been discontinued by the creator f
         };
 
     getMovies();
+    ```
 
   This snippet from my homepage I was excited about because I used a new method which I was previously unfamiliar with, and this was the Promise.all method. the problem I was facing before was that I needed a way to fetch from 9 different urls as the API I was using was limited in that I could not fetch all the data I needed all at once. So originally I attempted to actually fetch 9 times which did not work at all as it would not even return even 1 of the movies' data when I ran 'npm start'. Therefore after some research I happened upon Promise.all which worked. Although admittedly it did work slowly. Nonetheless I was still happy as my app was doing what it was supposed to do. 
 
+    ```js
     async function getResults() {
     try {
       const res = await fetch('https://i-m-d-b.herokuapp.com/?q=' + params.query + '&s=3&l=15');
@@ -141,10 +143,11 @@ Note: As of today, it seems that this API has been discontinued by the creator f
         console.log(err);
         }
     }
+    ```
 
   This is another block of code which I felt good about. The reason being that it was a goal of mine to implement a search bar tool which allowed users to search by particular keywords and see a selection of results that matches said keywords. fortunately for me the API allowed easy usage of this as all I actually needed to do was concatenate the users search query (params.query) into the end of the url that I wanted to fetch and it would give me a list of results that matched the search criteria. This worked well however some problems which occured were that for some reason it made the fetch call twice, and I could not figure out why this was happening. What I mean is that when a user searched any particular term, it would return the results (lets say as an example 9 movies which matched), and then a few seconds later it would again return those same (9) results at the end (so in total 18 results would show and there would appear the same movie twice). Another thing is that it took a long time for the results to actually show up. Users would wait up to 10 seconds just to see the search results. However I believe this particular problem was due to the API I was using as it would take quite a long time for almost any request.
 
-    Wins, Bugs, and Future Improvements
+## Wins, Bugs, and Future Improvements
 
 
 - I was able to meet all the deliverables which I was assigned meaning this was a successful project
@@ -161,7 +164,7 @@ Note: As of today, it seems that this API has been discontinued by the creator f
 - I would want the app to be mobile friendly
 - I would like for the app to have faster speeds
 
-    Key Learnings/Takeaways
+## Key Learnings/Takeaways
 
 - The app suffered from a major setback in that I did not account for real world news and updates in and around the tech space during my planning process, due to this a major component of my app is currently missing that renders the app unusable (Heroku changed their free plan and since my app was using an API that was hosted on Heroku, the creator of the API discontinued their server meaning I could no longer send requests to extract the movie data for my app)
 - Greater understanding of user authentication, as I had quite a few issues with that on the backend
