@@ -95,55 +95,54 @@ Next, I started working on creating my data structures for my backend and after 
 Note: As of today, it seems that this API has been discontinued by the creator following Herokus changes to their plans (which had occured after the completion of this project), hence the app is currently broken at this point in time. 
 
 ## Build/Code Process and Challenges
-    ```js
-    const getMovies = async () => {
-        try {
-
-            movies = await Promise.all(featured.map(tt => fetch(`https://i-m-d-b.herokuapp.com/?tt=${tt}`).then(res => res.json())));
-            setMovies(movies);
-            console.log(movies);
-        } catch (error) {
+```js
+const getMovies = async () => {
+    try {
+        movies = await Promise.all(featured.map(tt => fetch(`https://i-m-d-b.herokuapp.com/?tt=${tt}`).then(res => res.json())));
+        setMovies(movies);
+        console.log(movies);
+            } catch (error) {
             console.log(error);
         }
         };
 
-    getMovies();
-    ```
+getMovies();
+```
 
   This snippet from my homepage I was excited about because I used a new method which I was previously unfamiliar with, and this was the Promise.all method. the problem I was facing before was that I needed a way to fetch from 9 different urls as the API I was using was limited in that I could not fetch all the data I needed all at once. So originally I attempted to actually fetch 9 times which did not work at all as it would not even return even 1 of the movies' data when I ran 'npm start'. Therefore after some research I happened upon Promise.all which worked. Although admittedly it did work slowly. Nonetheless I was still happy as my app was doing what it was supposed to do. 
 
-    ```js
-    async function getResults() {
+```js
+async function getResults() {
+try {
+    const res = await fetch('https://i-m-d-b.herokuapp.com/?q=' + params.query + '&s=3&l=15');
+    const resultsData = await res.json();
+    let results1 = [];
+    Object.keys(resultsData).forEach(function(key) {
+    results1.push(resultsData[key])
+});
+console.log(results1);
+for (let i = 1; i < results1.length-3; i++) {
+    results.push(results1[i].tt_url.substring(27))
+}
+
+const getMovies = async () => {
     try {
-      const res = await fetch('https://i-m-d-b.herokuapp.com/?q=' + params.query + '&s=3&l=15');
-      const resultsData = await res.json();
-      let results1 = [];
-      Object.keys(resultsData).forEach(function(key) {
-        results1.push(resultsData[key])
-    });
-    console.log(results1);
-    for (let i = 1; i < results1.length-3; i++) {
-      results.push(results1[i].tt_url.substring(27))
+        // setMovies([])
+        // setResults([])
+        movies = await Promise.all(results.map(tt => fetch(`https://i-m-d-b.herokuapp.com/?tt=${tt}`).then(res => res.json())));
+        setMovies(movies);
+        // console.log(movies);
+    } catch (error) {
+        console.log(error);
     }
+    };
 
-    const getMovies = async () => {
-        try {
-            // setMovies([])
-            // setResults([])
-            movies = await Promise.all(results.map(tt => fetch(`https://i-m-d-b.herokuapp.com/?tt=${tt}`).then(res => res.json())));
-            setMovies(movies);
-            // console.log(movies);
-        } catch (error) {
-            console.log(error);
-        }
-        };
-
-        getMovies();
-        } catch (err) {
-        console.log(err);
-        }
+    getMovies();
+    } catch (err) {
+    console.log(err);
     }
-    ```
+}
+```
 
   This is another block of code which I felt good about. The reason being that it was a goal of mine to implement a search bar tool which allowed users to search by particular keywords and see a selection of results that matches said keywords. fortunately for me the API allowed easy usage of this as all I actually needed to do was concatenate the users search query (params.query) into the end of the url that I wanted to fetch and it would give me a list of results that matched the search criteria. This worked well however some problems which occured were that for some reason it made the fetch call twice, and I could not figure out why this was happening. What I mean is that when a user searched any particular term, it would return the results (lets say as an example 9 movies which matched), and then a few seconds later it would again return those same (9) results at the end (so in total 18 results would show and there would appear the same movie twice). Another thing is that it took a long time for the results to actually show up. Users would wait up to 10 seconds just to see the search results. However I believe this particular problem was due to the API I was using as it would take quite a long time for almost any request.
 
