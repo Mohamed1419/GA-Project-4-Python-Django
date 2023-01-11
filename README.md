@@ -1,6 +1,4 @@
-# GA-Project-4-Python-Django
-
-    Project 4: Moviewer E-commerce App
+# Project 4: Moviewer E-commerce App
 
 ## Description
 
